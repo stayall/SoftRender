@@ -1,12 +1,14 @@
 #pragma once
 #include <Windows.h>
 #include <string>
+#include <optional>
 
 template<class DERIVE_TYPE>
 class BaseWindow
 {
 public:
 	BaseWindow() : m_hwnd(nullptr) {};
+	virtual ~BaseWindow() = default;
 
 	static LRESULT CALLBACK WindProcHandle(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
@@ -65,6 +67,22 @@ public:
 		return m_hwnd ? TRUE : FALSE;
 	}
 
+	static std::optional<LRESULT> ProceseMessage()
+	{
+		MSG msg = {};
+
+		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+			{
+				return { msg.wParam };
+			}
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		return { };
+	}
+
 	HWND Window() const { return m_hwnd; }
 protected:
 	virtual PCWSTR ClassName() const = 0;
@@ -72,4 +90,5 @@ protected:
 
 	HWND m_hwnd;
 };
+
 

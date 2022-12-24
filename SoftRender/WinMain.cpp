@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <ShObjIdl.h>
+#include <atlbase.h>
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
 {
@@ -7,15 +8,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 	hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 	if (SUCCEEDED(hr))
 	{
-		IFileOpenDialog* pFileOpen;
+		CComPtr<IFileOpenDialog> pFileOpen;
 
-		hr = CoCreateInstance(CLSID_FileOpenDialog, nullptr, CLSCTX_ALL, IID_IFileOpenDialog, reinterpret_cast<LPVOID*>(&pFileOpen));
+		hr = CoCreateInstance(__uuidof(FileOpenDialog), nullptr, CLSCTX_ALL, IID_PPV_ARGS(&pFileOpen));
+		//hr = pFileOpen.CoCreateInstance(__uuidof(FileOpenDialog));
+
 		if (SUCCEEDED(hr))
 		{
 			hr = pFileOpen->Show(nullptr);
 			if (SUCCEEDED(hr))
 			{
-				IShellItem* pShellItem;
+				CComPtr < IShellItem> pShellItem;
 				hr = pFileOpen->GetResult(&pShellItem);
 
 				if (SUCCEEDED(hr))
@@ -27,10 +30,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
 						MessageBox(nullptr, file, L"File Path", MB_OK);
 						CoTaskMemFree(file);
 					}
-					pShellItem->Release();
 				}
 			}
-			pFileOpen->Release();
+			
 		}
 		CoUninitialize();
 	}

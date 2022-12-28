@@ -8,12 +8,13 @@ App::App()
     {
       
     }
-
+    win.InitGraphics();
     ShowWindow(win.Window(), SW_SHOW);
 }
 
 int App::Go()
 {
+    
     while (true)
     {
         if (const auto r = MainWindow::ProceseMessage())

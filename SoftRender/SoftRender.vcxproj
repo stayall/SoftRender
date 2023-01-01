@@ -152,6 +152,7 @@
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -19,7 +19,44 @@ Graphics::Graphics(HWND hwnd)
 	{
 
 	}
+
+	RECT rc;
+	GetClientRect(hwnd, &rc);
+	m_width = rc.right;
+	m_height = rc.bottom;
 }
+
+void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
+{
+
+	SetPixelV(memoryDC, x, y, RGB(r, g, b));
+}
+	
+
+void Graphics::Clear(COLORREF color)
+{
+	HRESULT hr;
+	hr = CreateGraphicsResource();
+	if (SUCCEEDED(hr))
+	{
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(m_hwnd, &ps);
+		pRenderTarget->BeginDraw();
+
+		FillRect(hdc, &ps.rcPaint, (HBRUSH)0x5200);
+		pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::SkyBlue));
+
+		hr = pRenderTarget->EndDraw();
+		if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET)
+		{
+			DiscardGraphicsResource();
+		}
+
+		EndPaint(m_hwnd, &ps);
+	}
+}
+
+
 
 HRESULT Graphics::CreateGraphicsResource()
 {
@@ -60,7 +97,7 @@ void Graphics::OnPaint()
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(m_hwnd, &ps);
 		pRenderTarget->BeginDraw();
-
+		
 		FillRect(hdc, &ps.rcPaint, (HBRUSH)0x5200);
 		pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::SkyBlue));
 

@@ -11,8 +11,13 @@ HRESULT MainWindow::InitGraphics()
 		return S_FALSE;
 	}
 	pGraphics = std::make_unique<Graphics>(m_hwnd);
-
+	pGraphics->StoreWindow();
 	return S_OK;
+}
+
+Graphics& MainWindow::Graphic()
+{
+	return *pGraphics;
 }
 
 PCWSTR MainWindow::ClassName() const
@@ -27,16 +32,12 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CREATE:
 	{
 		
-
 		return 0;
 	}
 	case WM_PAINT:
 	{
-		if (pGraphics)
-		{
-			pGraphics->OnPaint();
-		}
-		return 0;
+		pGraphics->RestoreWindow();
+		break;
 	}
 	case WM_CLOSE:
 	{
@@ -55,7 +56,10 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		if (pGraphics )
 		{
+		pGraphics->CheckWidthHeight();
 		pGraphics->Resize();
+		pGraphics->Clear();
+
 		}
 		return 0;
 	}

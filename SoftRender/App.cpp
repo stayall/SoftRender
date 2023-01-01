@@ -33,7 +33,7 @@ void App::DoFream()
 {
     Triangle t({ 100, 100, 0 }, { 100, 500, 0 }, { 500, 500, 0 });
     //win.Graphic().Clear();
-    Triangle t1({ 600, 100, 0 }, { 500, 200, 0 }, { 500, 500, 0 });
+    Triangle t1({ 500, 200, 0 }, { 600, 100, 0 }, { 500, 500, 0 });
     t.DrawCall(win.Graphic());
     t1.DrawCall(win.Graphic());
    

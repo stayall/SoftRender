@@ -11,6 +11,10 @@ Triangle::Triangle(DirectX::XMFLOAT3 p1, DirectX::XMFLOAT3 p2, DirectX::XMFLOAT3
 
 void Triangle::DrawCall(Graphics& ghs)
 {
+	if (BackFaceCulling())
+	{
+		return;
+	}
 	int min_x = min(min(points[0].x, points[1].x), points[2].x);
 	int min_y = min(min(points[0].y, points[1].y), points[2].y);
 	int max_x = max(max(points[0].x, points[1].x), points[2].x);
@@ -43,5 +47,22 @@ DirectX::XMFLOAT3 Triangle::InTriangle(float x, float y)
 	c = cross.y / cross.z;
 
 	return {1 - c -b, b, c};
+	
+}
+
+bool Triangle::BackFaceCulling()
+{
+
+	const auto P0P1 = DirectX::XMVectorSubtract(DirectX::XMVectorSet(points[1].x, points[1].y, 0.0f, 0.0f), DirectX::XMVectorSet(points[0].x, points[0].y, 0.0f, 0.0f));
+	const auto P1P2 = DirectX::XMVectorSubtract(DirectX::XMVectorSet(points[2].x, points[2].y, 0.0f, 0.0f), DirectX::XMVectorSet(points[1].x, points[1].y, 0.0f, 0.0f));
+	//DirectX::XMStoreFloat3(&P2P0, DirectX::XMVectorSubtract(DirectX::XMVectorSet(points[0].x, points[0].y, 0.0f, 0.0f), DirectX::XMVectorSet(points[2].x, points[2].y, 0.0f, 0.0f)));
+
+	const auto cross = DirectX::XMVector3Cross(P0P1, P1P2);
+	//getView
+	float dot;
+	DirectX::XMStoreFloat(&dot, DirectX::XMVector3Dot(DirectX::XMVECTOR{ 0.0f, 0.0f, -1.0f }, cross));
+	
+	return dot > 0 ? false : true;
+	
 	
 }

@@ -35,9 +35,9 @@ void App::DoFream()
     auto maxtrix = DirectX::XMMatrixScalingFromVector(DirectX::XMVectorSet(1.0f, 1.0f, 0.5f, 1.0f));
     auto maxtrix1 = DirectX::XMMatrixRotationX(90.0f * 3.1415926535 / 180);
     auto maxtrix2 = DirectX::XMMatrixScalingFromVector(DirectX::XMVectorSet(1.0f, 0.5f, 1.0f, 1.0f));
-    //Camera cmaera;
+    Camera cmaera;
     
-    auto c = DirectX::XMVector3Transform(DirectX::XMVectorSet(1.0f, 1.0f, -1.0f, 1.0f), maxtrix * maxtrix1 * maxtrix2);
+    auto c = DirectX::XMVector3Transform(DirectX::XMVectorSet(1.0f, 1.0f, -1.0f, 1.0f), cmaera.GetMatrix());
    
     win.Swap();
     //win.Graphic().RestoreWindow();

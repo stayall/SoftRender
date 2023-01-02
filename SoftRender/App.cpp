@@ -1,5 +1,5 @@
 #include "App.h"
-#include "Triangle.h"
+#include "Camera.h"
 App::App() 
 {
     
@@ -31,11 +31,13 @@ int App::Go()
 
 void App::DoFream()
 {
-    Triangle t({ 100, 100, 0 }, { 100, 500, 0 }, { 500, 500, 0 });
-    //win.Graphic().Clear();
-    Triangle t1({ 500, 200, 0 }, { 600, 100, 0 }, { 500, 500, 0 });
-    t.DrawCall(win.Graphic());
-    t1.DrawCall(win.Graphic());
+    
+    auto maxtrix = DirectX::XMMatrixScalingFromVector(DirectX::XMVectorSet(1.0f, 1.0f, 0.5f, 1.0f));
+    auto maxtrix1 = DirectX::XMMatrixRotationX(90.0f * 3.1415926535 / 180);
+    auto maxtrix2 = DirectX::XMMatrixScalingFromVector(DirectX::XMVectorSet(1.0f, 0.5f, 1.0f, 1.0f));
+    //Camera cmaera;
+    
+    auto c = DirectX::XMVector3Transform(DirectX::XMVectorSet(1.0f, 1.0f, -1.0f, 1.0f), maxtrix * maxtrix1 * maxtrix2);
    
     win.Swap();
     //win.Graphic().RestoreWindow();

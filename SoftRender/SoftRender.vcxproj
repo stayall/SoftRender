@@ -150,6 +150,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Triangle.cpp" />
@@ -158,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Triangle.h" />

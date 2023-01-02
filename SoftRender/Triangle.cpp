@@ -9,15 +9,19 @@ Triangle::Triangle(DirectX::XMFLOAT3 p1, DirectX::XMFLOAT3 p2, DirectX::XMFLOAT3
 	points[2] = p3;
 }
 
+Triangle::Triangle(DirectX::XMVECTOR p1, DirectX::XMVECTOR p2, DirectX::XMVECTOR p3)
+{
+	DirectX::XMStoreFloat3(points, p1);
+	DirectX::XMStoreFloat3(points + 1, p2);
+	DirectX::XMStoreFloat3(points + 2, p3);
+}
+
 void Triangle::DrawCall(Graphics& ghs)
 {
-	if (BackFaceCulling())
-	{
-		return;
-	}
+
 	int min_x = min(min(points[0].x, points[1].x), points[2].x);
-	int min_y = min(min(points[0].y, points[1].y), points[2].y);
 	int max_x = max(max(points[0].x, points[1].x), points[2].x);
+	int min_y = min(min(points[0].y, points[1].y), points[2].y);
 	int max_y = max(max(points[0].y, points[1].y), points[2].y);
 	for (size_t i = min_x; i < max_x; i++)
 	{

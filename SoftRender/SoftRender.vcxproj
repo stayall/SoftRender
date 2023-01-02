@@ -153,6 +153,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="SoftMath.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="SoftMath.h" />
     <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

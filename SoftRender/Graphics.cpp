@@ -29,7 +29,7 @@ Graphics::Graphics(HWND hwnd)
 void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
 {
 
-	SetPixelV(memoryDC, x, y, RGB(r, g, b));
+	SetPixelV(memoryDC, x, height - y, RGB(r, g, b));
 }
 	
 

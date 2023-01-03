@@ -53,7 +53,7 @@ private:
 	Camera camera;
 
 	IndexTriangleList<Vertex> inputData;
-	std::vector<Triangle<Vertex>> primitives;
+	std::vector<Triangle> primitives;
 };
 
 template<class T>

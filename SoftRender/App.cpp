@@ -11,7 +11,7 @@ App::App()
     }
     win.InitGraphics();
     ShowWindow(win.Window(), SW_SHOW);
-    //win.Graphic().StoreWindow();
+    
 
     auto p1 = DirectX::XMVectorSet(1.0f, 1.0f, -1, 1.0f);
 

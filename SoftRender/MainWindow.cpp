@@ -36,7 +36,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 	{
 		pGraphics->RestoreWindow();
-		break;
+		return 0;
 	}
 	case WM_CLOSE:
 	{
@@ -62,4 +62,6 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	default:
 		return DefWindowProc(m_hwnd, uMsg, wParam, lParam);;
 	}
+
+	return 0;
 }

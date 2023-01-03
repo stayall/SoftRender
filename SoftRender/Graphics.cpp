@@ -12,7 +12,7 @@ void SafeRelease(T** p)
 }
 
 Graphics::Graphics(HWND hwnd)
-	: m_hwnd(hwnd)
+	: m_hwnd(hwnd), pRenderTarget(nullptr)
 {
 	if (FAILED(D2D1CreateFactory(
 		D2D1_FACTORY_TYPE_SINGLE_THREADED, &pFactory)))
@@ -35,7 +35,7 @@ Graphics::~Graphics()
 void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
 {
 
-	SetPixelV(memoryDC, x, height - y, RGB(r, g, b));
+	SetPixelV(memoryDC, static_cast<int>(x), static_cast<int>(height - y), RGB(r, g, b));
 }
 	
 
@@ -64,7 +64,28 @@ void Graphics::Clear(COLORREF color)
 
 DirectX::XMMATRIX Graphics::GetSreenMatrix() const
 {
-	return DirectX::XMMatrixScaling(width, height, 1.0f);
+	return DirectX::XMMatrixScaling(static_cast<float>(width), static_cast<float>(height), 1.0f);
+}
+
+void Graphics::DrawCall()
+{
+	size_t indicesNumber = inputData.indices.size() / 3;
+	for (size_t i = 0; i < indicesNumber; i++)
+	{
+		//Triangle t{
+		//	inputData.vertexes[inputData.indices[i]],
+		//	inputData.vertexes[inputData.indices[i + 1]],
+		//	inputData.vertexes[inputData.indices[i + 2]] };
+
+		//if (t.BackFaceCulling())
+		{
+			continue;
+		}
+
+		//primitives.push_back(std::move(t));
+	}
+	
+	
 }
 
 

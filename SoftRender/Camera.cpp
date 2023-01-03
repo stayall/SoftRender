@@ -139,3 +139,8 @@ DirectX::XMMATRIX Camera::GetOrthProjectMatrix() const
             0.0f, 0.0f, 0.0f, 1.0f);
     return orthProjection;
 }
+
+DirectX::FXMVECTOR Camera::GetViewDirection() const
+{
+    return DirectX::XMLoadFloat3(&lookDirection);
+}

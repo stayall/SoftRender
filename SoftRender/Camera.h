@@ -11,7 +11,7 @@ public:
 	DirectX::XMMATRIX GetViewMatrix() const;
 	DirectX::XMMATRIX GetPreProjectMatrix() const;
 	DirectX::XMMATRIX GetOrthProjectMatrix() const;
-
+	DirectX::FXMVECTOR GetViewDirection() const;
 	//TODO:camera move;
 	//void update();
 private:

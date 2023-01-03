@@ -4,10 +4,13 @@
 #include <d2d1.h>
 #include <Windows.h>
 #include <DirectXMath.h>
+#include <memory>
 
 #include "Camera.h"
 #include "IndexTriangleList.h"
 #include "VertexData.h"
+#include "Triangle.h"
+
 
 #pragma comment(lib, "d2d1")
 
@@ -22,6 +25,8 @@ public:
 	void SetPixel(float x, float y, unsigned char u, unsigned char g, unsigned char b);
 	void Clear(COLORREF color = RGB(255, 255, 0));
 	DirectX::XMMATRIX GetSreenMatrix() const;
+
+	void DrawCall();
 
 	template<class T>
 	void IASetIndexVertexData(std::vector<T> v);
@@ -46,7 +51,9 @@ private:
 	ID2D1Factory* pFactory;
 	ID2D1HwndRenderTarget* pRenderTarget;
 	Camera camera;
+
 	IndexTriangleList<Vertex> inputData;
+	std::vector<Triangle<Vertex>> primitives;
 };
 
 template<class T>

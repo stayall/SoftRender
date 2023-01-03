@@ -59,6 +59,20 @@ DirectX::XMMATRIX Camera::GetMatrix() const
     return viewMatrix * (preProjection*  orthProjection);
 }
 
+
+
+
+DirectX::XMFLOAT4 Camera::tansform(DirectX::FXMVECTOR v) const
+{
+    DirectX::XMFLOAT4 p;
+    DirectX::XMStoreFloat4(&p, DirectX::XMVector4Transform(v, GetMatrix()));
+    p = DirectX::XMFLOAT4{ p.x / p.w, p.y / p.w, p.z / p.w, 1 };
+
+    auto sreen = DirectX::XMMatrixScaling(1200, 600, 1);
+    DirectX::XMStoreFloat4(&p, DirectX::XMVector4Transform(DirectX::XMLoadFloat4(&p), sreen));
+    return p;
+}
+
 DirectX::XMMATRIX Camera::GetViewMatrix() const
 {
     namespace dx = DirectX;
@@ -84,7 +98,7 @@ DirectX::XMMATRIX Camera::GetPreProjectMatrix() const
 {
     namespace dx = DirectX;
 
-    dx::XMVECTOR{ 1.0f, 1.0f, 1.0f, 1.0f };
+  
     float near = snear, far = sfar;
     DirectX::XMMATRIX  preProjection;
   
@@ -106,10 +120,8 @@ DirectX::XMMATRIX Camera::GetOrthProjectMatrix() const
 {
     namespace dx = DirectX;
 
-    dx::XMVECTOR{ 1.0f, 1.0f, 1.0f, 1.0f };
     float near = snear, far = sfar;
-    DirectX::XMMATRIX viewMatrix, orthProjection, preProjection;
-    dx::XMFLOAT3 gxt;
+    DirectX::XMMATRIX orthProjection;
     float r, l, t, b, n = near, f = far;
 
 

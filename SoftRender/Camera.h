@@ -1,13 +1,13 @@
 #pragma once
 #include <DirectXMath.h>
 
-
 //Orthograpic and Perspective 
 class Camera
 {
 public:
 	Camera();
 	DirectX::XMMATRIX GetMatrix() const;
+	DirectX::XMFLOAT4 tansform(DirectX::XMVECTOR v) const;
 	DirectX::XMMATRIX GetViewMatrix() const;
 	DirectX::XMMATRIX GetPreProjectMatrix() const;
 	DirectX::XMMATRIX GetOrthProjectMatrix() const;

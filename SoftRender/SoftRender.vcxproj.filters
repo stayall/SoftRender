@@ -62,5 +62,11 @@
     <ClInclude Include="SoftMath.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="IndexTriangleList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

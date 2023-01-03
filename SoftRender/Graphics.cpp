@@ -22,8 +22,8 @@ Graphics::Graphics(HWND hwnd)
 
 	RECT rc;
 	GetClientRect(hwnd, &rc);
-	m_width = rc.right;
-	m_height = rc.bottom;
+	width = rc.right;
+	height = rc.bottom;
 }
 
 void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
@@ -54,6 +54,45 @@ void Graphics::Clear(COLORREF color)
 
 		EndPaint(m_hwnd, &ps);
 	}
+}
+
+DirectX::XMMATRIX Graphics::GetSreenMatrix() const
+{
+	return DirectX::XMMatrixScaling(width, height, 1.0f);
+}
+
+
+
+void Graphics::IASetIndex(std::vector<unsigned short> n)
+{
+	inputData.AddIndex(n);
+}
+
+void Graphics::CheckWidthHeight()
+{
+	RECT clientRect;
+	GetClientRect(m_hwnd, &clientRect);
+	width = clientRect.right - clientRect.left;
+	height = clientRect.bottom - clientRect.top;
+}
+
+void Graphics::StoreWindow()
+{
+	HDC hDC = GetDC(m_hwnd);
+	memoryDC = CreateCompatibleDC(hDC);
+	memoryBitmap = CreateCompatibleBitmap(hDC, width, height);
+	SelectObject(memoryDC, memoryBitmap);
+	BitBlt(memoryDC, 0, 0, width, height, hDC, 0, 0, SRCCOPY);
+	ReleaseDC(m_hwnd, hDC);
+}
+
+void Graphics::RestoreWindow()
+{
+	PAINTSTRUCT ps;
+	HDC hDC = BeginPaint(m_hwnd, &ps);
+	if (memoryDC)
+		BitBlt(hDC, 0, 0, width, height, memoryDC, 0, 0, SRCCOPY);
+	EndPaint(m_hwnd, &ps);
 }
 
 

@@ -18,6 +18,7 @@ public:
 	Graphics(HWND hwnd);
 	Graphics(const Graphics& rhs) = delete;
 	Graphics &operator=(const Graphics& rhs) = delete;
+	~Graphics();
 	void SetPixel(float x, float y, unsigned char u, unsigned char g, unsigned char b);
 	void Clear(COLORREF color = RGB(255, 255, 0));
 	DirectX::XMMATRIX GetSreenMatrix() const;
@@ -25,11 +26,12 @@ public:
 	template<class T>
 	void IASetIndexVertexData(std::vector<T> v);
 	void IASetIndex(std::vector<unsigned short> n);
-private:
+public :
 	void CheckWidthHeight();
 	void StoreWindow();
 	void RestoreWindow();
 private:
+	//anthoer bit
 	HRESULT CreateGraphicsResource();
 	void DiscardGraphicsResource();
 	void OnPaint();

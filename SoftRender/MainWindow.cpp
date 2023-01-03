@@ -11,7 +11,6 @@ HRESULT MainWindow::InitGraphics()
 		return S_FALSE;
 	}
 	pGraphics = std::make_unique<Graphics>(m_hwnd);
-	pGraphics->StoreWindow();
 	return S_OK;
 }
 
@@ -31,7 +30,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 	{
-		
+		InitGraphics();
 		return 0;
 	}
 	case WM_PAINT:
@@ -54,13 +53,10 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_SIZE:
 	{
-		if (pGraphics )
-		{
 		pGraphics->CheckWidthHeight();
 		pGraphics->Resize();
 		pGraphics->Clear();
-
-		}
+		pGraphics->StoreWindow();
 		return 0;
 	}
 	default:

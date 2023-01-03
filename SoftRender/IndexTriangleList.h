@@ -34,7 +34,7 @@ template<class T>
 inline void IndexTriangleList<T>::AddIndex(const std::vector<unsigned short>& n)
 {
 	assert(n.size() % 3 == 0);
-	indices.insert(indices.end(), n.begin(), v.end());
+	indices.insert(indices.end(), n.begin(), n.end());
 }
 
 template<class T>

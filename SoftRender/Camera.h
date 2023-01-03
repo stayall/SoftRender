@@ -7,7 +7,7 @@ class Camera
 public:
 	Camera();
 	DirectX::XMMATRIX GetMatrix() const;
-	DirectX::XMFLOAT4 tansform(DirectX::XMVECTOR v) const;
+	DirectX::XMFLOAT4 tansform(DirectX::FXMVECTOR v) const;
 	DirectX::XMMATRIX GetViewMatrix() const;
 	DirectX::XMMATRIX GetPreProjectMatrix() const;
 	DirectX::XMMATRIX GetOrthProjectMatrix() const;

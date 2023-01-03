@@ -26,6 +26,12 @@ Graphics::Graphics(HWND hwnd)
 	height = rc.bottom;
 }
 
+Graphics::~Graphics()
+{
+	DeleteObject(memoryBitmap);
+	DeleteDC(memoryDC);
+}
+
 void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
 {
 
@@ -78,6 +84,10 @@ void Graphics::CheckWidthHeight()
 
 void Graphics::StoreWindow()
 {
+	if (memoryBitmap)
+	{
+		DeleteObject(memoryBitmap);
+	}
 	HDC hDC = GetDC(m_hwnd);
 	memoryDC = CreateCompatibleDC(hDC);
 	memoryBitmap = CreateCompatibleBitmap(hDC, width, height);

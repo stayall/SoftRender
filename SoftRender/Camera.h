@@ -8,6 +8,9 @@ class Camera
 public:
 	Camera();
 	DirectX::XMMATRIX GetMatrix() const;
+	DirectX::XMMATRIX GetViewMatrix() const;
+	DirectX::XMMATRIX GetPreProjectMatrix() const;
+	DirectX::XMMATRIX GetOrthProjectMatrix() const;
 
 	//TODO:camera move;
 	//void update();

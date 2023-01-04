@@ -72,17 +72,17 @@ void Graphics::DrawCall()
 	size_t indicesNumber = inputData.indices.size() / 3;
 	for (size_t i = 0; i < indicesNumber; i++)
 	{
-		//Triangle t{
-		//	inputData.vertexes[inputData.indices[i]],
-		//	inputData.vertexes[inputData.indices[i + 1]],
-		//	inputData.vertexes[inputData.indices[i + 2]] };
+		/*Triangle t{
+			inputData.vertexes[inputData.indices[i]],
+			inputData.vertexes[inputData.indices[i + 1]],
+			inputData.vertexes[inputData.indices[i + 2]] };
 
-		//if (t.BackFaceCulling())
+		if (t.BackFaceCulling())
 		{
 			continue;
 		}
 
-		//primitives.push_back(std::move(t));
+		primitives.push_back(std::move(t));*/
 	}
 	
 	

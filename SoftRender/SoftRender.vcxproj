@@ -154,7 +154,6 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="SoftMath.cpp" />
-    <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +164,6 @@
     <ClInclude Include="IndexTriangleList.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="SoftMath.h" />
-    <ClInclude Include="Triangle.h" />
     <ClInclude Include="VertexData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

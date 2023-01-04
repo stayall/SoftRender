@@ -9,7 +9,7 @@
 #include "Camera.h"
 #include "IndexTriangleList.h"
 #include "VertexData.h"
-#include "Triangle.h"
+
 
 
 #pragma comment(lib, "d2d1")
@@ -17,7 +17,22 @@
 class Graphics
 {
 	friend class MainWindow;
+
 public:
+	template<class T>
+	class Triangle
+	{
+
+	public:
+		Triangle() = default;
+		Triangle(T p1, T p2, T p3);
+		~Triangle() = default;
+		void DrawCall(Graphics& ghs);
+		DirectX::XMFLOAT3 InTriangle(float x, float y);
+		bool BackFaceCulling();
+	private:
+		Vertex points[3];
+	};
 	Graphics(HWND hwnd);
 	Graphics(const Graphics& rhs) = delete;
 	Graphics &operator=(const Graphics& rhs) = delete;
@@ -53,7 +68,7 @@ private:
 	Camera camera;
 
 	IndexTriangleList<Vertex> inputData;
-	std::vector<Triangle> primitives;
+	std::vector<Triangle<Vertex>> primitives;
 };
 
 template<class T>

@@ -6,7 +6,8 @@
 
 //TODO:Big question
 
-extern class Graphics;
+class Graphics;
+
 class Triangle
 {
 

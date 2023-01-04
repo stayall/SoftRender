@@ -56,7 +56,7 @@ DirectX::XMMATRIX Camera::GetMatrix() const
     );
 
     //
-    return viewMatrix * (preProjection*  orthProjection);
+    return viewMatrix * preProjection*  orthProjection;
 }
 
 

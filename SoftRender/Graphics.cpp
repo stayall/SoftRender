@@ -67,25 +67,36 @@ DirectX::XMMATRIX Graphics::GetSreenMatrix() const
 	return DirectX::XMMatrixScaling(static_cast<float>(width), static_cast<float>(height), 1.0f);
 }
 
-void Graphics::DrawCall()
+void Graphics::InputDataProcess()
 {
+	const auto viewDirection = camera.GetViewDirection();
 	size_t indicesNumber = inputData.indices.size() / 3;
+
+	
+	inputData.HomogeneousTransform(camera.GetMatrix());
+	
+
 	for (size_t i = 0; i < indicesNumber; i++)
 	{
-		/*Triangle t{
+		Triangle<Vertex> t{
 			inputData.vertexes[inputData.indices[i]],
 			inputData.vertexes[inputData.indices[i + 1]],
 			inputData.vertexes[inputData.indices[i + 2]] };
-
-		if (t.BackFaceCulling())
+	
+		if (t.BackFaceCulling(viewDirection))
 		{
 			continue;
 		}
 
-		primitives.push_back(std::move(t));*/
+		primitives.push_back(std::move(t));
 	}
 	
 	
+}
+
+DirectX::XMFLOAT4 Graphics::HomogeneousDivision(const DirectX::XMFLOAT4 &v)
+{
+	return {v.x / v.w, v.y / v.w, v.z / v.w, 1.0f };
 }
 
 

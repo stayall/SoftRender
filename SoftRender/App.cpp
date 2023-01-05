@@ -42,7 +42,7 @@ void App::DoFream()
     DirectX::XMVECTOR v;
     v = DirectX::XMVector3Transform({ 1.0f, 1.0f, 1.0f, 1.0f }, DirectX::XMMatrixScaling(1.0, 1.0, 1.0));
     
-    win.Graphic().SetPixel(0.0, 0.0, 0, 0, 0);
+    
   
     win.Swap();
 

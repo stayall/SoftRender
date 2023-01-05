@@ -34,14 +34,10 @@ Graphics::~Graphics()
 
 void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
 {
+	size_t pos = width * y + x;
+	pData[pos] = RGB(255, 255, 255);
+	
 
-	for (int i = 1; i < width; i++)
-	{
-		for (int j = 1; j < height; j++)
-		{
-			pData[width * i + j] = RGB(0, 0, 0);
-		}
-	}
 }
 
 
@@ -130,11 +126,11 @@ void Graphics::CreateWindowBitmap()
 	BITMAPINFO info = { 0 };
 	info.bmiHeader.biSize = sizeof(info.bmiHeader);
 	info.bmiHeader.biWidth = width;
-	info.bmiHeader.biHeight = -height;
+	info.bmiHeader.biHeight = height;
 	info.bmiHeader.biPlanes = 1;
 	info.bmiHeader.biBitCount = 32;
 	info.bmiHeader.biCompression = BI_RGB;
-	info.bmiHeader.biSizeImage = width * height * 32 / 8;
+	info.bmiHeader.biSizeImage = width * height * sizeof(PixelBits) / 8;
 
 
 	memoryBitmap = ::CreateDIBSection(memoryDC, &info, DIB_RGB_COLORS, reinterpret_cast<void**>(&pData), nullptr, 0);
@@ -142,7 +138,7 @@ void Graphics::CreateWindowBitmap()
 	{
 		SelectObject(memoryDC, memoryBitmap);
 	}
-
+	BitBlt(memoryDC, 0, 0, width, height, hDC, 0, 0, SRCCOPY);
 	ReleaseDC(m_hwnd, hDC);
 }
 

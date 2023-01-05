@@ -18,7 +18,7 @@
 class Graphics
 {
 	friend class MainWindow;
-
+	using PixelBits = UINT32;
 public:
 	
 
@@ -58,7 +58,7 @@ private:
 	ID2D1Factory* pFactory;
 	ID2D1HwndRenderTarget* pRenderTarget;
 	Camera camera;
-	BYTE* pData = nullptr;
+	UINT32* pData = nullptr;
 };
 
 

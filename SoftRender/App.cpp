@@ -44,7 +44,7 @@ void App::DoFream()
     
     win.Graphic().SetPixel(0.0, 0.0, 0, 0, 0);
   
-   
+    win.Swap();
 
   
 }

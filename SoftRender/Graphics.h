@@ -34,11 +34,16 @@ public:
 	static DirectX::XMFLOAT4 HomogeneousDivision(const DirectX::XMFLOAT4 &v);
 
 public :
-	void CheckWidthHeight();
-	void StoreWindow();
-	void RestoreWindow();
+	
+	 void CheckWidthHeight();
+	__declspec(deprecated("** this is a deprecated function **")) void StoreWindow();
+	__declspec(deprecated("** this is a deprecated function **")) void RestoreWindow();
+
+	void CreateWindowBitmap();
+	void SwapBitMapBuffer();
+
 private:
-	//anthoer bit
+	
 	HRESULT CreateGraphicsResource();
 	void DiscardGraphicsResource();
 	void OnPaint();
@@ -53,7 +58,7 @@ private:
 	ID2D1Factory* pFactory;
 	ID2D1HwndRenderTarget* pRenderTarget;
 	Camera camera;
-
+	BYTE* pData = nullptr;
 };
 
 

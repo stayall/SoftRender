@@ -35,8 +35,8 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	case WM_PAINT:
 	{
-		//pGraphics->RestoreWindow();
-		return 0;
+		pGraphics->SwapBitMapBuffer();
+		break;
 	}
 	case WM_CLOSE:
 	{
@@ -56,12 +56,10 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		pGraphics->CheckWidthHeight();
 		pGraphics->Resize();
 		pGraphics->Clear();
-		pGraphics->StoreWindow();
+		pGraphics->CreateWindowBitmap();
 		return 0;
 	}
-	default:
-		return DefWindowProc(m_hwnd, uMsg, wParam, lParam);;
 	}
 
-	return 0;
+	return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
 }

@@ -34,7 +34,16 @@ Graphics::~Graphics()
 
 void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
 {
-
+	auto hdc = GetDC(m_hwnd);
+	for (int i = 1; i < width; i++)
+	{
+		for (int j = 1; j < height; j++)
+		{
+			//SetPixelV(memoryDC, static_cast<int>(i), static_cast<int>(j), RGB(0, 0, 0));
+		}
+	}
+	ReleaseDC(m_hwnd, hdc);
+	return;
 	SetPixelV(memoryDC, static_cast<int>(x), static_cast<int>(height - y), RGB(r, g, b));
 }
 	
@@ -67,32 +76,7 @@ DirectX::XMMATRIX Graphics::GetSreenMatrix() const
 	return DirectX::XMMatrixScaling(static_cast<float>(width), static_cast<float>(height), 1.0f);
 }
 
-void Graphics::InputDataProcess()
-{
-	const auto viewDirection = camera.GetViewDirection();
-	size_t indicesNumber = inputData.indices.size() / 3;
 
-	
-	inputData.HomogeneousTransform(camera.GetMatrix());
-	
-
-	for (size_t i = 0; i < indicesNumber; i++)
-	{
-		Triangle<Vertex> t{
-			inputData.vertexes[inputData.indices[i]],
-			inputData.vertexes[inputData.indices[i + 1]],
-			inputData.vertexes[inputData.indices[i + 2]] };
-	
-		if (t.BackFaceCulling(viewDirection))
-		{
-			continue;
-		}
-
-		primitives.push_back(std::move(t));
-	}
-	
-	
-}
 
 DirectX::XMFLOAT4 Graphics::HomogeneousDivision(const DirectX::XMFLOAT4 &v)
 {
@@ -101,10 +85,6 @@ DirectX::XMFLOAT4 Graphics::HomogeneousDivision(const DirectX::XMFLOAT4 &v)
 
 
 
-void Graphics::IASetIndex(std::vector<unsigned short> n)
-{
-	inputData.AddIndex(n);
-}
 
 void Graphics::CheckWidthHeight()
 {

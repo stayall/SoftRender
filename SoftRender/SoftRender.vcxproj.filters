@@ -49,7 +49,7 @@
       <Filter>源文件\PipeLine</Filter>
     </ClCompile>
     <ClCompile Include="PixelStage.cpp">
-      <Filter>源文件</Filter>
+      <Filter>源文件\PipeLine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +87,7 @@
       <Filter>头文件\PipeLine</Filter>
     </ClInclude>
     <ClInclude Include="PixelStage.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\PipeLine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

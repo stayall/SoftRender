@@ -35,10 +35,24 @@ Graphics::~Graphics()
 void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
 {
 	auto hdc = GetDC(m_hwnd);
+	RECT rc;
+	rc.bottom = 200;
+	rc.top = 400;
+	rc.left = 200;
+	rc.right = 400;
+	FillRect(hdc, &rc, (HBRUSH)RGB(0, 0, 0));
+	
+	return;
 	for (int i = 1; i < width; i++)
 	{
 		for (int j = 1; j < height; j++)
 		{
+			RECT rc;
+			rc.bottom = j;
+			rc.top = j + 1;
+			rc.left = i;
+			rc.right = i + 1;
+			FillRect(hdc, &rc, (HBRUSH)RGB(0, 0, 0));
 			//SetPixelV(memoryDC, static_cast<int>(i), static_cast<int>(j), RGB(0, 0, 0));
 		}
 	}

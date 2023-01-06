@@ -1,5 +1,6 @@
 #include "App.h"
 
+#include "IndexTriangleList.h"
 
 App::App() 
 {
@@ -13,12 +14,18 @@ App::App()
     ShowWindow(win.Window(), SW_SHOW);
     
 
-    auto p1 = DirectX::XMVectorSet(1.0f, 1.0f, -1, 1.0f);
+    auto p1 = DirectX::XMFLOAT3{ 1.0f, 1.0f, -1.0f };
 
-    auto p2 = DirectX::XMVectorSet(-1, -1, -1, 1.0f);
-    auto p3 = DirectX::XMVectorSet(1.0f, -1.0f, -1, 1.0f);
+    auto p2 = DirectX::XMFLOAT3{ -1, -1, -1.0f};
+    auto p3 = DirectX::XMFLOAT3{ 1.0f, -1.0f, -1.0f };
 
-    
+  
+    std::vector<Data> p{ {p1}, {p2}, {p3} };
+    std::vector<unsigned short> i= { 0, 1, 2 };
+    IndexTriangleList<Data> id(p, i);
+
+    win.Graphic().SetIndexData(id);
+    win.Graphic().SetRenderTarget();
 }
 
 int App::Go()
@@ -42,6 +49,7 @@ void App::DoFream()
     DirectX::XMVECTOR v;
     v = DirectX::XMVector3Transform({ 1.0f, 1.0f, 1.0f, 1.0f }, DirectX::XMMatrixScaling(1.0, 1.0, 1.0));
     
+    win.Graphic().DrawCall();
     
   
     win.Swap();

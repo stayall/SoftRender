@@ -10,13 +10,23 @@ struct VertexData
 
 using Vertex = VertexData;
 
+using Color = DirectX::XMFLOAT4;
 struct FragmentData
 {
 	DirectX::XMINT2 viewPosition;
 	DirectX::XMFLOAT4 position;
 	DirectX::XMFLOAT4 normal;
-	DirectX::XMFLOAT3 color;
+	Color color;
 	DirectX::XMFLOAT2 uv;
 };
 
 using Fragment = FragmentData;
+
+struct InputData
+{
+	DirectX::XMFLOAT3 position;
+
+	operator Vertex() const;
+};
+
+using Data = InputData;

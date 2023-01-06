@@ -3,26 +3,39 @@
 #include <cassert>
 
 #include <DirectXMath.h>
+#include "VertexData.h"
 
 template<class T>
 class IndexTriangleList
 {
 	friend class Graphics;
-private:
+public:
 	IndexTriangleList() = default;
+	IndexTriangleList(const std::vector<T>& v, const std::vector<unsigned short>& n);
 	~IndexTriangleList() = default;
 
 	void AddVertexes(const std::vector<T>& v);
 	void AddIndex(const std::vector<unsigned short>& n);
 	void Transform(DirectX::FXMMATRIX m);
 	void HomogeneousTransform(DirectX::FXMMATRIX m);
-
+	const std::vector<Vertex> &GetVertexData() const;
+	const std::vector<unsigned short>& GetIndex() const;
+	void Convert();
+	
 private:
 	std::vector<T> vertexes;
+	std::vector<Vertex> convertVertexes;
 	std::vector<unsigned short> indices;
 };
 
 
+
+template<class T>
+inline IndexTriangleList<T>::IndexTriangleList(const std::vector<T>& v, const std::vector<unsigned short>& n)
+	: vertexes(v), indices(n)
+{
+	Convert();
+}
 
 template<class T>
 inline void IndexTriangleList<T>::AddVertexes(const std::vector<T>& v)
@@ -59,5 +72,26 @@ inline void IndexTriangleList<T>::HomogeneousTransform(DirectX::FXMMATRIX m)
 		v.position = DirectX::XMFLOAT3{ pos.x / pos.w, pos.y / pos.w, pos.z / pos.w};
 		position.emplace_back(std::move(pos));
 		
+	}
+}
+
+template<class T>
+inline const std::vector<Vertex>& IndexTriangleList<T>::GetVertexData() const
+{
+	return convertVertexes;
+}
+
+template<class T>
+inline const std::vector<unsigned short>& IndexTriangleList<T>::GetIndex() const
+{
+	return indices;
+}
+
+template<class T>
+inline void IndexTriangleList<T>::Convert()
+{
+	for (const auto& v : vertexes)
+	{
+		convertVertexes.emplace_back(v);
 	}
 }

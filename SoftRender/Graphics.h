@@ -31,6 +31,13 @@ public:
 	void Clear(COLORREF color = RGB(255, 255, 0));
 	DirectX::XMMATRIX GetSreenMatrix() const;
 	static DirectX::XMFLOAT4 HomogeneousDivision(const DirectX::XMFLOAT4 &v);
+	template<class T>
+	void SetIndexData(const T& data);
+
+	void DrawCall();
+	void SetRenderTarget();
+
+	//TODO: separate interface implemnet in outside
 
 public :
 	
@@ -59,7 +66,16 @@ private:
 	Camera camera;
 	UINT32* pData = nullptr;
 	
+	std::vector<InputStage> inputs;
+	PixelStage ps;
 };
 
+template<class T>
+inline void Graphics::SetIndexData(const T& data)
+{
+	InputStage input;
+	input.IASetVertexData(data.GetVertexData());
+	input.IASetIndex(data.GetIndex());
 
-
+	inputs.emplace_back(std::move(input));
+}

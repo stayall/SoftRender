@@ -18,7 +18,7 @@ DirectX::XMFLOAT3 RasterizationStage::Triangle::InTriangle(float x, float y) con
 
 	DirectX::XMFLOAT3 cross;
 	DirectX::XMStoreFloat3(&cross, DirectX::XMVector3Cross(DirectX::XMVectorSet(P0P1.x, P0P2.x, PP0.x, 0.0f), DirectX::XMVectorSet(P0P1.y, P0P2.y, PP0.y, 0.0f)));
-	float a, b, c;
+	float b, c;
 	b = cross.x / cross.z;
 	c = cross.y / cross.z;
 

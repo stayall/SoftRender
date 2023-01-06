@@ -79,6 +79,26 @@ DirectX::XMFLOAT4 Graphics::HomogeneousDivision(const DirectX::XMFLOAT4& v)
 
 
 
+void Graphics::DrawCall()
+{
+	for (auto& input : inputs)
+	{
+		VertexStage vs(input.GetVertexData());
+		vs.Transform(camera.GetMatrix() * GetSreenMatrix());
+		RasterizationStage rs;
+		rs.SetViewDirection(camera.GetViewDirection());
+		rs.TriangleSetUp(input.GetVertexData(), input.GetIndexData());
+		rs.TriangleTraversel();
+		ps.GenerateFream(rs.GetFragments());
+	}
+}
+
+void Graphics::SetRenderTarget()
+{
+	ps.SetDepthStencil(width, height);
+	ps.SetViewport(width, height);
+}
+
 void Graphics::CheckWidthHeight()
 {
 	RECT clientRect;

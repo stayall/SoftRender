@@ -54,6 +54,9 @@
     <ClCompile Include="InputStage.cpp">
       <Filter>源文件\PipeLine</Filter>
     </ClCompile>
+    <ClCompile Include="VertexData.cpp">
+      <Filter>源文件\PipeLine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h">

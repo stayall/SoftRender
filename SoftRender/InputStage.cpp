@@ -1,6 +1,6 @@
 #include "InputStage.h"
 
-void InputStage::IASetIndexVertexData(const std::vector<Vertex> &v)
+void InputStage::IASetVertexData(const std::vector<Vertex> &v)
 {
 	vertexes.insert(vertexes.end(), v.begin(), v.end());
 }

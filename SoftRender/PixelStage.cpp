@@ -4,15 +4,29 @@ const float PixelStage::maxDepth = 1.0f;
 
 void PixelStage::SetDepthStencil(int w, int h)
 {
-	width = w;
-	height = h;
+	depthStencilWidth = w;
+	depthStencilHeight = h;
 
-	depthStencil.resize(width);
+	depthStencil.resize(depthStencilWidth);
 	for (auto& v : depthStencil)
 	{
-		v.resize(height);
+		v.resize(depthStencilHeight);
 	}
 	ClearDepthStencil();
+}
+
+void PixelStage::SetViewport(int w, int h)
+{
+	viewPortWidth = w;
+	viewPortHeight = h;
+
+	fream.resize(viewPortWidth);
+	for (auto& v : fream)
+	{
+		v.resize(viewPortHeight);
+	}
+
+	ClearColor();
 }
 
 bool PixelStage::DepthTest(const Fragment& f)
@@ -43,11 +57,6 @@ void PixelStage::GenerateFream(const std::vector<Fragment>& fragments)
 		return;
 	}
 
-	fream.resize(width);
-	for (auto& v : fream)
-	{
-		v.resize(height);
-	}
 
 	for (const auto& f : fragments)
 	{
@@ -60,4 +69,21 @@ void PixelStage::GenerateFream(const std::vector<Fragment>& fragments)
 
 void PixelStage::PixelShading(const Fragment &f)
 {
+	
+}
+
+void PixelStage::ClearColor(const float color = 0.0f)
+{
+	for (auto& w : fream)
+	{
+		for (auto& h : w)
+		{
+			h = color;
+		}
+	}
+}
+
+const std::vector<std::vector<float>>& PixelStage::GetFream() const
+{
+	return fream;
 }

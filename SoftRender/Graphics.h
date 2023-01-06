@@ -7,9 +7,10 @@
 #include <memory>
 
 #include "Camera.h"
-#include "IndexTriangleList.h"
-#include "VertexData.h"
 #include "InputStage.h"
+#include "VertexStage.h"
+#include "RasterizationStage.h"
+#include "PixelStage.h"
 
 
 
@@ -29,8 +30,6 @@ public:
 	void SetPixel(float x, float y, unsigned char u, unsigned char g, unsigned char b);
 	void Clear(COLORREF color = RGB(255, 255, 0));
 	DirectX::XMMATRIX GetSreenMatrix() const;
-
-
 	static DirectX::XMFLOAT4 HomogeneousDivision(const DirectX::XMFLOAT4 &v);
 
 public :
@@ -59,6 +58,7 @@ private:
 	ID2D1HwndRenderTarget* pRenderTarget;
 	Camera camera;
 	UINT32* pData = nullptr;
+	
 };
 
 

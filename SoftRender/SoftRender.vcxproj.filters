@@ -51,6 +51,9 @@
     <ClCompile Include="PixelStage.cpp">
       <Filter>源文件\PipeLine</Filter>
     </ClCompile>
+    <ClCompile Include="InputStage.cpp">
+      <Filter>源文件\PipeLine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h">

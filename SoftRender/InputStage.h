@@ -6,36 +6,20 @@
 #include "IndexTriangleList.h" 
 #include "VertexData.h"
 
-template <class T>
+
 class InputStage
 {
 public:
+	void IASetIndexVertexData(const std::vector<Vertex> &v);
+	void IASetIndex(const std::vector<unsigned short> &n);
 
-
-	void IASetIndexVertexData(std::vector<T> v);
-	void IASetIndex(std::vector<unsigned short> n);
-
-	std::vector<Vertex>& GetInputData() ;
+	std::vector<Vertex>& GetVertexData();
+	std::vector<unsigned short>& GetIndexData();
 private:
-	IndexTriangleList<T> inputData;
-	std::vector<Vertex> VertexData;
+	std::vector<Vertex> vertexes;
+	std::vector<unsigned short> indices;
 };
 
 
-template<class T>
-inline void InputStage<T>::IASetIndexVertexData(std::vector<T> v)
-{
-	inputData.AddVertexes(v);
-}
 
-template<class T>
-inline void InputStage<T>::IASetIndex(std::vector<unsigned short> n)
-{
-	inputData.AddIndex(n);
-}
 
-template<class T>
-inline std::vector<Vertex>& InputStage<T>::GetInputData()
-{
-	return inputData;
-}

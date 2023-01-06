@@ -9,6 +9,8 @@ class PixelStage
 public:
 	void SetDepthStencil(int width, int height);
 	void SetViewport(int width, int height);
+	int GetViewportWidth() const;
+	int GetViewportHeight() const;
 	bool DepthTest(const Fragment& f);
 	void ClearDepthStencil();
 	void GenerateFream(const std::vector<Fragment>& fragments);

@@ -35,7 +35,7 @@ Graphics::~Graphics()
 void Graphics::SetPixel(float x, float y, unsigned char r, unsigned char g, unsigned char b)
 {
 	size_t pos = width * y + x;
-	pData[pos] = RGB(255, 255, 255);
+	pData[pos] = RGB(r, g, b);
 	
 
 }
@@ -90,6 +90,21 @@ void Graphics::DrawCall()
 		rs.TriangleSetUp(vs.GetVertexData(), input.GetIndexData());
 		rs.TriangleTraversel(input.GetVertexData());
 		ps.GenerateFream(rs.GetFragments());
+	}
+
+	const auto &fream = ps.GetFream();
+	auto vWidth = ps.GetViewportWidth();
+	auto vHeight = ps.GetViewportHeight();
+
+	for (size_t i = 0; i < vWidth; i++)
+	{
+		for (size_t j = 0; j < vHeight; j++)
+		{
+			auto color = DirectX::XMLoadFloat4(&fream[i][j]);
+			Color newColor;
+			DirectX::XMStoreFloat4(&newColor, DirectX::XMVectorMultiply(DirectX::XMVectorReplicate(255.0f), color));
+			SetPixel(i, j, newColor.x, newColor.y, newColor.z);
+		}
 	}
 }
 

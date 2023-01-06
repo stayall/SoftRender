@@ -17,7 +17,7 @@ App::App()
     auto p1 = DirectX::XMFLOAT3{ 1.0f, 1.0f, -1.0f };
 
     auto p2 = DirectX::XMFLOAT3{ -1, -1, -1.0f};
-    auto p3 = DirectX::XMFLOAT3{ 1.0f, -1.0f, -1.0f };
+    auto p3 = DirectX::XMFLOAT3{ 1.0f, -1.0f, -5.0f };
 
 
     std::vector<Data> p = { {p1, Color{1.0f, 1.0f, 0.0f, 1.0f}}, 
@@ -25,6 +25,7 @@ App::App()
         {p3, Color{0.0f, 1.0f, 1.0f, 1.0f}} };
     std::vector<unsigned short> i= { 0, 1, 2 };
     IndexTriangleList<Data> id(p, i);
+    id.Transform(DirectX::XMMatrixScaling(10, 10, 10));
 
     win.Graphic().SetIndexData(id);
     win.Graphic().SetRenderTarget();

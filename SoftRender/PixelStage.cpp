@@ -29,6 +29,16 @@ void PixelStage::SetViewport(int w, int h)
 	ClearColor();
 }
 
+int PixelStage::GetViewportWidth() const
+{
+	return viewPortWidth;
+}
+
+int PixelStage::GetViewportHeight() const
+{
+	return viewPortHeight;
+}
+
 bool PixelStage::DepthTest(const Fragment& f)
 {
 	auto &Depth = depthStencil[f.viewPosition.x][f.viewPosition.y];

@@ -2,15 +2,17 @@
 
 #include <DirectXMath.h>
 
+using Color = DirectX::XMFLOAT4;
+
 struct VertexData
 {
 	DirectX::XMFLOAT4 position;
 	DirectX::XMFLOAT4 normal;
+	Color color;
 };
 
 using Vertex = VertexData;
 
-using Color = DirectX::XMFLOAT4;
 struct FragmentData
 {
 	DirectX::XMINT2 viewPosition;
@@ -25,7 +27,7 @@ using Fragment = FragmentData;
 struct InputData
 {
 	DirectX::XMFLOAT3 position;
-
+	Color color;
 	operator Vertex() const;
 };
 

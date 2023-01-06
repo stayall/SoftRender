@@ -87,8 +87,8 @@ void Graphics::DrawCall()
 		vs.Transform(camera.GetMatrix() * GetSreenMatrix());
 		RasterizationStage rs;
 		rs.SetViewDirection(camera.GetViewDirection());
-		rs.TriangleSetUp(input.GetVertexData(), input.GetIndexData());
-		rs.TriangleTraversel();
+		rs.TriangleSetUp(vs.GetVertexData(), input.GetIndexData());
+		rs.TriangleTraversel(input.GetVertexData());
 		ps.GenerateFream(rs.GetFragments());
 	}
 }

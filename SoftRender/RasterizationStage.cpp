@@ -97,7 +97,7 @@ void RasterizationStage::MakeFragment(const Triangle& t, const std::vector<Verte
 	std::vector<float> v;
 	for (size_t i = 0; i < 3; i++)
 	{
-		v.push_back(std::abs(vertexes[t.index[i]].position.z));
+		v.push_back(vertexes[t.index[i]].position.z);
 	}
 
 	for (int i = min_x; i < max_x; i++)

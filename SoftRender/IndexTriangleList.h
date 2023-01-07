@@ -54,9 +54,9 @@ inline void IndexTriangleList<T>::AddIndex(const std::vector<unsigned short>& n)
 template<class T>
 inline void IndexTriangleList<T>::Transform(DirectX::FXMMATRIX m)
 {
-	for (auto& v : vertexes)
+	for (auto& v : convertVertexes)
 	{
-		DirectX::XMStoreFloat3(&v.position, DirectX::XMVector4Transform(DirectX::XMLoadFloat3(&v.position), m));
+		DirectX::XMStoreFloat4(&v.position, DirectX::XMVector4Transform(DirectX::XMLoadFloat4(&v.position), m));
 	}
 }
 

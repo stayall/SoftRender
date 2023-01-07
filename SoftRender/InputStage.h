@@ -9,14 +9,20 @@
 class InputStage
 {
 public:
-	void IASetVertexData(const std::vector<Vertex> &v);
-	void IASetIndex(const std::vector<unsigned short> &n);
+	void IASetData(const std::vector<Vertex>& v, const std::vector<unsigned short>& n);
 
-	std::vector<Vertex>& GetVertexData();
-	std::vector<unsigned short>& GetIndexData();
+	__declspec(deprecated("** this is a deprecated function **")) void IASetVertexData(const std::vector<Vertex> &v);
+	__declspec(deprecated("** this is a deprecated function **")) void IASetIndex(const std::vector<unsigned short> &n);
+	__declspec(deprecated("** this is a deprecated function **"))std::vector<Vertex>& GetVertexData();
+	__declspec(deprecated("** this is a deprecated function **"))std::vector<unsigned short>& GetIndexData();
+	
+	const std::vector<Vertex>& GetVertexData(int index) const;
+	const std::vector<unsigned short>& GetIndexData(int index) const;
+	size_t GetObjectSize() const;
 private:
 	std::vector<Vertex> vertexes;
 	std::vector<unsigned short> indices;
+	std::vector<std::pair<std::vector<Vertex>, std::vector<unsigned short>>> objects;
 };
 
 

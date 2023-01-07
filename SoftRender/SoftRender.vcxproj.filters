@@ -57,6 +57,9 @@
     <ClCompile Include="VertexData.cpp">
       <Filter>源文件\PipeLine</Filter>
     </ClCompile>
+    <ClCompile Include="WinGraphics.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h">
@@ -94,6 +97,9 @@
     </ClInclude>
     <ClInclude Include="PixelStage.h">
       <Filter>头文件\PipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="WinGraphics.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -68,9 +68,6 @@ void PixelStage::GenerateFream(const std::vector<Fragment>& fragments)
 		return;
 	}
 
-	ClearColor();
-	ClearDepthStencil();
-
 	for (const auto& f : fragments)
 	{
 		if (DepthTest(f))

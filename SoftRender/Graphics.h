@@ -34,8 +34,9 @@ public:
 	template<class T>
 	void SetIndexData(const T& data);
 
-	void DrawCall();
+	void DrawCall(size_t index);
 	void SetRenderTarget();
+	void Swap();
 
 	//TODO: separate interface implemnet in outside
 
@@ -66,16 +67,15 @@ private:
 	Camera camera;
 	UINT32* pData = nullptr;
 	
-	std::vector<InputStage> inputs;
+	InputStage inputs;
 	PixelStage ps;
+	size_t currentDrawIndex = 0;
 };
 
 template<class T>
 inline void Graphics::SetIndexData(const T& data)
 {
-	InputStage input;
-	input.IASetVertexData(data.GetVertexData());
-	input.IASetIndex(data.GetIndex());
-
-	inputs.emplace_back(std::move(input));
+	inputs.IASetData(data.GetVertexData(), data.GetIndex());
+	//inputs.IASetVertexData(data.GetVertexData());
+	//inputs.IASetIndex(data.GetIndex());
 }

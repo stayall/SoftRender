@@ -28,6 +28,9 @@ App::App()
     id.Transform(DirectX::XMMatrixScaling(10, 10, 10));
 
     win.Graphic().SetIndexData(id);
+
+    id.Transform(DirectX::XMMatrixTranslation(-50, -10, -10));
+    win.Graphic().SetIndexData(id);
     win.Graphic().SetRenderTarget();
 }
 
@@ -52,10 +55,12 @@ void App::DoFream()
     DirectX::XMVECTOR v;
     v = DirectX::XMVector3Transform({ 1.0f, 1.0f, 1.0f, 1.0f }, DirectX::XMMatrixScaling(1.0, 1.0, 1.0));
     
-    win.Graphic().DrawCall();
+    win.Graphic().DrawCall(3);
+    win.Graphic().DrawCall(3);
     
   
     win.Swap();
+    win.Graphic().Swap();
 
   
 }

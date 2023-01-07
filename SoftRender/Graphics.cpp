@@ -79,18 +79,33 @@ DirectX::XMFLOAT4 Graphics::HomogeneousDivision(const DirectX::XMFLOAT4& v)
 
 
 
-void Graphics::DrawCall()
+void Graphics::DrawCall(size_t index)
 {
-	for (auto& input : inputs)
+	if (currentDrawIndex >= inputs.GetObjectSize())
 	{
-		VertexStage vs(input.GetVertexData());
-		vs.Transform(camera.GetMatrix() * GetSreenMatrix());
-		RasterizationStage rs;
-		rs.SetViewDirection(camera.GetViewDirection());
-		rs.TriangleSetUp(vs.GetVertexData(), input.GetIndexData());
-		rs.TriangleTraversel(input.GetVertexData());
-		ps.GenerateFream(rs.GetFragments());
+		currentDrawIndex = 0;
 	}
+	const auto& vdata = inputs.GetVertexData(currentDrawIndex);
+	const auto& idata = inputs.GetIndexData(currentDrawIndex);
+	auto vbeg = vdata.begin();
+	auto ibeg = idata.begin();
+
+	auto vend = vdata.begin() + index;
+	auto iend = idata.begin() + index;
+
+	currentDrawIndex++;
+
+	std::vector<Vertex> currentObjectVertex(vbeg, vend);
+	std::vector<unsigned short> currentObjectIndex(ibeg, iend);
+
+	VertexStage vs(currentObjectVertex);
+	vs.Transform(camera.GetMatrix() * GetSreenMatrix());
+	RasterizationStage rs;
+	rs.SetViewDirection(camera.GetViewDirection());
+
+	rs.TriangleSetUp(vs.GetVertexData(), currentObjectIndex);
+	rs.TriangleTraversel(vdata);
+	ps.GenerateFream(rs.GetFragments());
 
 	const auto &fream = ps.GetFream();
 	auto vWidth = ps.GetViewportWidth();
@@ -105,13 +120,18 @@ void Graphics::DrawCall()
 			DirectX::XMStoreFloat4(&newColor, DirectX::XMVectorMultiply(DirectX::XMVectorReplicate(255.0f), color));
 			SetPixel(i, j, newColor.x, newColor.y, newColor.z);
 		}
-	}
+	}	
 }
 
 void Graphics::SetRenderTarget()
 {
 	ps.SetDepthStencil(width, height);
 	ps.SetViewport(width, height);
+}
+
+void Graphics::Swap()
+{
+	currentDrawIndex = 0;
 }
 
 void Graphics::CheckWidthHeight()

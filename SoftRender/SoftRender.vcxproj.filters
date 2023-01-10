@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\PipeLine">
+      <UniqueIdentifier>{8b0010be-7a48-45d7-9b86-dcd6830655ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\PipeLine">
+      <UniqueIdentifier>{be2eefac-4522-47dd-88ca-88fdb892ea0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -24,12 +30,75 @@
     <ClCompile Include="MainWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftMath.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexStage.cpp">
+      <Filter>源文件\PipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="RasterizationStage.cpp">
+      <Filter>源文件\PipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelStage.cpp">
+      <Filter>源文件\PipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="InputStage.cpp">
+      <Filter>源文件\PipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexData.cpp">
+      <Filter>源文件\PipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="WinGraphics.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="MainWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SoftMath.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexTriangleList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="InputStage.h">
+      <Filter>头文件\PipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexData.h">
+      <Filter>头文件\PipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="RasterizationStage.h">
+      <Filter>头文件\PipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexStage.h">
+      <Filter>头文件\PipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelStage.h">
+      <Filter>头文件\PipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="WinGraphics.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

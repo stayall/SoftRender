@@ -1,38 +1,65 @@
 #include "MainWindow.h"
 
-PCWSTR MainWindow::ClassName() const
+
+
+
+
+HRESULT MainWindow::InitGraphics()
 {
-    return L"Class";
+	if (m_hwnd == nullptr)
+	{
+		return S_FALSE;
+	}
+	pGraphics = std::make_unique<Graphics>(m_hwnd);
+	return S_OK;
 }
 
-LRESULT MainWindow::HandleMessage(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+Graphics& MainWindow::Graphic()
 {
-    switch (uMsg)
-    {
-    case WM_PAINT:
-    {
-        PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hwnd, &ps);
+	return *pGraphics;
+}
 
-        FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
+PCWSTR MainWindow::ClassName() const
+{
+	return L"Class";
+}
 
-        EndPaint(hwnd, &ps);
-        return 0;
-    }
-    case WM_CLOSE:
-    {
-        if (MessageBox(hwnd, L"Really close", L"Application", MB_OKCANCEL) == IDOK)
-        {
-            DestroyWindow(hwnd);
-        }
-        return 0;
-    }
-    case WM_DESTROY:
-    {
-        PostQuitMessage(69);
-        return 0;
-    }
-    default:
-        return DefWindowProc(hwnd, uMsg, wParam, lParam);;
-    }
+LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+	case WM_CREATE:
+	{
+		InitGraphics();
+		return 0;
+	}
+	case WM_PAINT:
+	{
+		pGraphics->SwapBitMapBuffer();
+		break;
+	}
+	case WM_CLOSE:
+	{
+		if (MessageBox(m_hwnd, L"Really close", L"Application", MB_OKCANCEL) == IDOK)
+		{
+			DestroyWindow(m_hwnd);
+		}
+		return 0;
+	}
+	case WM_DESTROY:
+	{
+		PostQuitMessage(69);
+		return 0;
+	}
+	case WM_SIZE:
+	{
+		pGraphics->CheckWidthHeight();
+		pGraphics->Resize();
+		pGraphics->Clear();
+		pGraphics->CreateWindowBitmap();
+		return 0;
+	}
+	}
+
+	return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
 }

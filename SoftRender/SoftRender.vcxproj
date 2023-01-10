@@ -148,13 +148,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="InputStage.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="PixelStage.cpp" />
+    <ClCompile Include="RasterizationStage.cpp" />
+    <ClCompile Include="SoftMath.cpp" />
+    <ClCompile Include="VertexData.cpp" />
+    <ClCompile Include="VertexStage.cpp" />
+    <ClCompile Include="WinGraphics.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="App.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="IndexTriangleList.h" />
+    <ClInclude Include="InputStage.h" />
     <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="PixelStage.h" />
+    <ClInclude Include="RasterizationStage.h" />
+    <ClInclude Include="SoftMath.h" />
+    <ClInclude Include="VertexData.h" />
+    <ClInclude Include="VertexStage.h" />
+    <ClInclude Include="WinGraphics.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
